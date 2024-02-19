@@ -1,11 +1,25 @@
 version: '3'
 services:
-  storage-api:
+  storage-api-stable:
     image: ghcr.io/deadwood-ai/storage-api:v0.2.0
     restart: always
     ports:
-      - 127.0.0.1:8000:8000
+      - 127.0.0.1:80080:80080
     environment:
       BASE_DIR: /data
+      UVICORN_PORT: 80080
+      UVICORN_ROOT_PATH: /api/v1
+    volumes:
+      - ./data:/data
+  
+  storage-api-dev:
+    image: ghcr.io/deadwood-ai/storage-api:latest
+    restart: always
+    ports:
+      - 127.0.0.1:80081:80081
+    environment:
+      BASE_DIR: /data
+      UVICORN_PORT: 80081
+      UVICORN_ROOT_PATH: /api/dev
     volumes:
       - ./data:/data
