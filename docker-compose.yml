@@ -9,7 +9,7 @@ services:
       BASE_DIR: /data
       UVICORN_PORT: 40040
       UVICORN_HOST: 0.0.0.0
-#      UVICORN_ROOT_PATH: /api/v1
+      UVICORN_ROOT_PATH: /api/v1
     volumes:
       - ./data:/data
   
@@ -22,6 +22,6 @@ services:
       BASE_DIR: /data
       UVICORN_PORT: 40042
       UVICORN_HOST: 0.0.0.0
-#      UVICORN_ROOT_PATH: /api/dev
+      UVICORN_ROOT_PATH: /api/dev
     volumes:
       - ./data:/data
