@@ -4,7 +4,7 @@ services:
     image: ghcr.io/deadwood-ai/storage-api:v0.1.0
     restart: always
     ports:
-      - 8000:8000
+      - 127.0.0.1:8000:8000
     environment:
       BASE_DIR: /data
     volumes:
