@@ -10,6 +10,9 @@ services:
       UVICORN_PORT: 40040
       UVICORN_HOST: 0.0.0.0
       UVICORN_ROOT_PATH: /api/v1
+      # There has to be a .env file that contains the following two lines
+      SUPABASE_URL: ${SUPABASE_URL}
+      SUPABASE_KEY: ${SUPABASE_KEY}
     volumes:
       - ./data:/data
   
@@ -23,5 +26,8 @@ services:
       UVICORN_PORT: 40042
       UVICORN_HOST: 0.0.0.0
       UVICORN_ROOT_PATH: /api/dev
+      # There has to be a .env file that contains the following two lines
+      SUPABASE_URL: ${SUPABASE_URL}
+      SUPABASE_KEY: ${SUPABASE_KEY}
     volumes:
       - ./dev-data:/data
