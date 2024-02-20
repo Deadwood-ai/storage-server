@@ -18,4 +18,4 @@ cd $SCRIPT_DIR/..
 git pull
 
 # update the docker compose file
-docker-compose up -d
+docker compose up -d
