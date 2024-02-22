@@ -13,6 +13,7 @@ services:
       # There has to be a .env file that contains the following two lines
       SUPABASE_URL: ${SUPABASE_URL}
       SUPABASE_KEY: ${SUPABASE_KEY}
+      METADATA_TABLE: upload_files
     volumes:
       - ./data:/data
   
@@ -29,5 +30,6 @@ services:
       # There has to be a .env file that contains the following two lines
       SUPABASE_URL: ${SUPABASE_URL}
       SUPABASE_KEY: ${SUPABASE_KEY}
+      METADATA_TABLE: upload_files_dev
     volumes:
       - ./dev-data:/data
