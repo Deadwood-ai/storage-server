@@ -33,3 +33,37 @@ services:
       METADATA_TABLE: upload_files_dev
     volumes:
       - ./dev-data:/data
+
+  processor-dev:
+    image: ghcr.io/deadwood-ai/processor:v0.2.0
+    restart: always
+    ports:
+      - 127.0.0.1:40080:40080
+    environment:
+      BASE_DIR: /data
+      STORAGE_LOCAL: true
+      MAPSERVER_LOCAL: true
+      UVICORN_PORT: 40080
+      UVICORN_HOST: 0.0.0.0
+      UVICORN_ROOT_PATH: /api
+
+      # These credentials have to be provided in a .env file
+      SUPABASE_URL: ${SUPABASE_URL}
+      SUPABASE_KEY: ${SUPABASE_KEY}
+      METADATA_TABLE: upload_files_dev
+      PROCESSOR_PASSWORD: ${PROCESSOR_PASSWORD}
+    volumes:
+      - ./dev-data:/data
+  
+  mapserver-dev:
+    image: pdok/mapserver
+    restart: always
+    ports:
+      - 127.0.0.1:8080:80
+    environment:
+      MS_MAPFILE: /srv/data/MAINFILE.map
+      SERVICE_TYPE: WMS
+    volumes:
+      - ./dev-data/mapfiles:/srv/data
+      - ./dev-data/processed:/data/processed
+  
