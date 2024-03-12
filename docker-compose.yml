@@ -46,7 +46,7 @@ services:
       UVICORN_PORT: 40080
       UVICORN_HOST: 0.0.0.0
       UVICORN_ROOT_PATH: /api/dev
-      OWS_BASE_URL: str = "https://data.deadtrees.earth/mapserver?"
+      OWS_BASE_URL: https://data.deadtrees.earth/mapserver?
 
       # These credentials have to be provided in a .env file
       SUPABASE_URL: ${SUPABASE_URL}
