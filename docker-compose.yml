@@ -35,7 +35,7 @@ services:
       - ./dev-data:/data
 
   processor-dev:
-    image: ghcr.io/deadwood-ai/preprocessor:v0.2.4
+    image: ghcr.io/deadwood-ai/preprocessor:v0.2.5
     restart: always
     ports:
       - 127.0.0.1:40080:40080
