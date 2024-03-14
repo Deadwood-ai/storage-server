@@ -58,6 +58,7 @@ services:
   
   mapserver-dev:
     image: pdok/mapserver
+    user: root
     restart: always
     ports:
       - 127.0.0.1:8080:80
