@@ -57,7 +57,13 @@ services:
       - ./dev-data:/data
   
   mapserver-dev:
-    image: pdok/mapserver
+    #image: pdok/mapserver
+    build:
+      context: ./mapserver
+      dockerfile: Dockerfile
+      args:
+        UID: ${UID}
+        GID: ${GID}
     restart: always
     ports:
       - 127.0.0.1:8080:80
