@@ -47,6 +47,9 @@ services:
       UVICORN_HOST: 0.0.0.0
       UVICORN_ROOT_PATH: /api/dev
       OWS_BASE_URL: https://data.deadtrees.earth/mapserver?
+      PROCESSOR_COMPRESSION: JPEG
+      COMPRESSION_QUALITY: 30
+      SCALE_FACTOR: auto
 
       # These credentials have to be provided in a .env file
       SUPABASE_URL: ${SUPABASE_URL}
