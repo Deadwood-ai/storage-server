@@ -85,6 +85,8 @@ services:
     restart: always
     ports:
       - 127.0.0.1:8888:8888
+    link:
+      - storage-api-dev
     environment:
       JUPYTER_TOKEN: ${JUPYTER_TOKEN}
       SUPABASE_URL: ${SUPABASE_URL}
