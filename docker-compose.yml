@@ -93,6 +93,12 @@ services:
       PROCESSOR_PASSWORD: ${PROCESSOR_PASSWORD}
     volumes:
       - ./dev-data:/data
+      - type: bind
+        source: /home/mirko/.ssh/id_rsa
+        target: /root/.ssh/id_rsa
+      - type: bind
+        source: /home/mirko/.ssh/id_rsa.pub
+        target: /root/.ssh/id_rsa.pub
     command: jupyter notebook --NotebookApp.ip=0.0.0.0 --allow-root --no-browser --NotebookApp.port=8888
 
   
