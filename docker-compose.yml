@@ -1,7 +1,6 @@
-version: '3'
 services:
   storage-api-stable:
-    image: ghcr.io/deadwood-ai/storage-api:v0.4.3
+    image: ghcr.io/deadwood-ai/storage-api:v0.4.5
     restart: always
     ports:
       - 127.0.0.1:40040:40040
@@ -101,4 +100,15 @@ services:
         target: /root/.ssh/id_rsa.pub
     command: jupyter notebook --NotebookApp.ip=0.0.0.0 --allow-root --no-browser --NotebookApp.port=8888
 
+  # create a prometheus container for monitoring
+  prometheus:
+    image: prom/prometheus
+    restart: always
+    volumes:
+      - ./prometheus/prometheus.yml:/etc/prometheus/prometheus.yml
+      - ./data/prometheus:/prometheus
+    command:
+      - '--config.file=/etc/prometheus/prometheus.yml'
+    ports:
+      - 127.0.0.1:9090:9090
   
