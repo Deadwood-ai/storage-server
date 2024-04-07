@@ -105,10 +105,11 @@ services:
     image: prom/prometheus
     restart: always
     volumes:
-      - ./prometheus/prometheus.yml:/etc/prometheus/prometheus.yml
-      #- ./data/prometheus:/prometheus
-    command:
-      - '--config.file=/etc/prometheus/prometheus.yml'
+      - type: bind
+        source: ./prometheus/prometheus.yml
+        target: /etc/prometheus/prometheus.yml
+    # command:
+    #   - '--config.file=/etc/prometheus/prometheus.yml'
     ports:
       - 127.0.0.1:9090:9090
   
