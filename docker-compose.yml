@@ -103,6 +103,7 @@ services:
   # create a prometheus container for monitoring
   prometheus:
     image: prom/prometheus
+    user: root
     restart: always
     volumes:
       - type: bind
