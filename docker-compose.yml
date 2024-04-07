@@ -102,7 +102,7 @@ services:
 
   # create a prometheus container for monitoring
   prometheus:
-    image: prom/prometheus:v2.51
+    image: prom/prometheus
     restart: unless-stopped
     user: root
     volumes:
