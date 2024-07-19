@@ -19,4 +19,5 @@ git pull
 
 # update the docker compose file
 docker compose pull
+docker compose build
 docker compose up -d
