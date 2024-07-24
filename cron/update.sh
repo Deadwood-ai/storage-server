@@ -21,3 +21,7 @@ git pull
 docker compose pull
 docker compose build
 docker compose up -d
+
+# update nginx config
+cp ./nginx/storage-api.conf /etc/nginx/sites-available/storage-api.conf
+service nginx reload
