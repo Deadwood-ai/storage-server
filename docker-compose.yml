@@ -29,7 +29,7 @@ services:
       LABELS_TABLE: v1_labels
       
     volumes:
-      - ./data:/data
+      - ./production:/data
 
 
   # storage-api-stable:
@@ -124,7 +124,7 @@ services:
       METADATA_TABLE: upload_files_dev
       PROCESSOR_PASSWORD: ${PROCESSOR_PASSWORD}
     volumes:
-      - ./data:/data
+      - ./production:/data
       - type: bind
         source: /home/mirko/.ssh/id_rsa
         target: /root/.ssh/id_rsa
@@ -139,7 +139,7 @@ services:
     restart: unless-stopped
     user: root
     volumes:
-      - ./data/prometheus:/prometheus
+      - ./production/prometheus:/prometheus
       - type: bind
         source: ./prometheus/prometheus.yml
         target: /etc/prometheus/prometheus.yml
