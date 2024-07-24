@@ -23,5 +23,5 @@ docker compose build
 docker compose up -d
 
 # update nginx config
-cp ./nginx/storage-api.conf /etc/nginx/sites-available/storage-api.conf
-service nginx reload
+#cp ./nginx/storage-api.conf /etc/nginx/sites-available/storage-api.conf
+#service nginx reload
