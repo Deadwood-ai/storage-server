@@ -42,11 +42,11 @@ services:
       SUPABASE_URL: ${SUPABASE_URL}
       SUPABASE_USER: processor@deadtrees.earth
       SUPABASE_PASSWORD: ${PROCESSOR_PASSWORD}
-      OLD_ARCHIVE_PATH: ./dev-data/archive
+      OLD_ARCHIVE_PATH: /data/archive
       API_URL: http://deadwood-api:40040
       MIGRATION_TABLE: migrate_v1
     volumes:
-      - ./production:/data
+      - ./dev-data:/data
     command: echo "Use migration service like 'docker compose --rm migrate bash'"
 
   # storage-api-stable:
