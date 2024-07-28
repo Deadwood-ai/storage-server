@@ -20,6 +20,7 @@ services:
       # Supabase settings 
       SUPABASE_URL: ${SUPABASE_URL}
       SUPABASE_KEY: ${SUPABASE_KEY}
+      PROCESSOR_USERNAME: processor@deadtrees.earth
       PROCESSOR_PASSWORD: ${PROCESSOR_PASSWORD}
 
       # set the tables for the data
@@ -27,6 +28,12 @@ services:
       METADATA_TABLE: v1_metadata
       COGS_TABLE: v1_cogs
       LABELS_TABLE: v1_labels
+
+      # queue settings
+      QUEUE_TABLE: v1_queue
+      QUEUE_POSITION_TABLE: v1_queue_positions
+      CONCURRENT_TASKS: 2
+      TASK_RETRY_DELAY: 60
       
     volumes:
       - ./production:/data
@@ -40,8 +47,8 @@ services:
       BASE_DIR: /data
       SUPABASE_KEY: ${SUPABASE_KEY}
       SUPABASE_URL: ${SUPABASE_URL}
-      SUPABASE_USER: processor@deadtrees.earth
-      SUPABASE_PASSWORD: ${PROCESSOR_PASSWORD}
+      PROCESSOR_USER: processor@deadtrees.earth
+      PROCESSOR_PASSWORD: ${PROCESSOR_PASSWORD}
       OLD_ARCHIVE_PATH: /data/archive
       API_URL: http://deadwood-api:40040
       MIGRATION_TABLE: migrate_v1
