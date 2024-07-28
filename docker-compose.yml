@@ -47,7 +47,7 @@ services:
       BASE_DIR: /data
       SUPABASE_KEY: ${SUPABASE_KEY}
       SUPABASE_URL: ${SUPABASE_URL}
-      PROCESSOR_USER: processor@deadtrees.earth
+      PROCESSOR_USERNAME: processor@deadtrees.earth
       PROCESSOR_PASSWORD: ${PROCESSOR_PASSWORD}
       OLD_ARCHIVE_PATH: /data/archive
       API_URL: http://deadwood-api:40040
