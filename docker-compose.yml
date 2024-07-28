@@ -48,83 +48,24 @@ services:
     volumes:
       - ./dev-data:/data
     command: echo "Use migration service like 'docker compose --rm migrate bash'"
-
-  # storage-api-stable:
-  #   image: ghcr.io/deadwood-ai/storage-api:v0.4.5
-  #   restart: always
-  #   ports:
-  #     - 127.0.0.1:40040:40040
-  #   environment:
-  #     BASE_DIR: /data
-  #     UVICORN_PORT: 40040
-  #     UVICORN_HOST: 0.0.0.0
-  #     UVICORN_ROOT_PATH: /api/v1
-  #     # There has to be a .env file that contains the following two lines
-  #     SUPABASE_URL: ${SUPABASE_URL}
-  #     SUPABASE_KEY: ${SUPABASE_KEY}
-  #     METADATA_TABLE: upload_files
-  #   volumes:
-  #     - ./data:/data
   
-  # storage-api-dev:
-  #   image: ghcr.io/deadwood-ai/storage-api:latest
-  #   restart: always
+  # mapserver-dev:
+  #   #image: pdok/mapserver
+  #   build:
+  #     context: ./mapserver
+  #     dockerfile: Dockerfile
+  #     args:
+  #       UID: ${UID}
+  #       GID: ${GID}
+  #   restart: unless-stopped
   #   ports:
-  #     - 127.0.0.1:40042:40042
+  #     - 127.0.0.1:8080:80
   #   environment:
-  #     BASE_DIR: /data
-  #     UVICORN_PORT: 40042
-  #     UVICORN_HOST: 0.0.0.0
-  #     UVICORN_ROOT_PATH: /api/dev
-  #     # There has to be a .env file that contains the following two lines
-  #     SUPABASE_URL: ${SUPABASE_URL}
-  #     SUPABASE_KEY: ${SUPABASE_KEY}
-  #     METADATA_TABLE: upload_files_dev
+  #     MS_MAPFILE: /srv/data/MAINFILE.map
+  #     SERVICE_TYPE: WMS
   #   volumes:
-  #     - ./dev-data:/data
-
-  # processor-dev:
-  #   image: ghcr.io/deadwood-ai/preprocessor:latest
-  #   restart: always
-  #   ports:
-  #     - 127.0.0.1:40080:40080
-  #   environment:
-  #     BASE_DIR: /data
-  #     STORAGE_LOCAL: true
-  #     MAPSERVER_LOCAL: true
-  #     UVICORN_PORT: 40080
-  #     UVICORN_HOST: 0.0.0.0
-  #     UVICORN_ROOT_PATH: /api/dev
-  #     OWS_BASE_URL: https://data.deadtrees.earth/mapserver?
-  #     #PROCESSOR_COMPRESSION: JPEG
-  #     #COMPRESSION_QUALITY: 30
-  #     SCALE_FACTOR: auto
-
-  #     # These credentials have to be provided in a .env file
-  #     SUPABASE_URL: ${SUPABASE_URL}
-  #     SUPABASE_KEY: ${SUPABASE_KEY}
-  #     METADATA_TABLE: upload_files_dev
-  #     PROCESSOR_PASSWORD: ${PROCESSOR_PASSWORD}
-  #   volumes:
-  #     - ./dev-data:/data
-  
-  mapserver-dev:
-    #image: pdok/mapserver
-    build:
-      context: ./mapserver
-      dockerfile: Dockerfile
-      args:
-        UID: ${UID}
-        GID: ${GID}
-    restart: unless-stopped
-    ports:
-      - 127.0.0.1:8080:80
-    environment:
-      MS_MAPFILE: /srv/data/MAINFILE.map
-      SERVICE_TYPE: WMS
-    volumes:
-      - ./dev-data/mapfiles:/srv/data
-      - ./dev-data/processed:/data/processed
+  #     - ./dev-data/mapfiles:/srv/data
+  #     - ./dev-data/processed:/data/processed
 
   # create a python container for direct access of the backend
   jupyter:
