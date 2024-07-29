@@ -56,23 +56,23 @@ services:
       - ./dev-data:/data
     command: echo "Use migration service like 'docker compose --rm migrate bash'"
   
-  # mapserver-dev:
-  #   #image: pdok/mapserver
-  #   build:
-  #     context: ./mapserver
-  #     dockerfile: Dockerfile
-  #     args:
-  #       UID: ${UID}
-  #       GID: ${GID}
-  #   restart: unless-stopped
-  #   ports:
-  #     - 127.0.0.1:8080:80
-  #   environment:
-  #     MS_MAPFILE: /srv/data/MAINFILE.map
-  #     SERVICE_TYPE: WMS
-  #   volumes:
-  #     - ./dev-data/mapfiles:/srv/data
-  #     - ./dev-data/processed:/data/processed
+  mapserver-dev:
+    #image: pdok/mapserver
+    build:
+      context: ./mapserver
+      dockerfile: Dockerfile
+      args:
+        UID: ${UID}
+        GID: ${GID}
+    restart: unless-stopped
+    ports:
+      - 127.0.0.1:8080:80
+    environment:
+      MS_MAPFILE: /srv/data/MAINFILE.map
+      SERVICE_TYPE: WMS
+    volumes:
+      - ./dev-data/mapfiles:/srv/data
+      - ./dev-data/processed:/data/processed
 
   # create a python container for direct access of the backend
   jupyter:
