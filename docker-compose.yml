@@ -55,7 +55,7 @@ services:
       API_URL: http://deadwood-api:40040
       MIGRATION_TABLE: migrate_v1
     volumes:
-      - ./dev-data:/data
+      - ./production:/data
     command: echo "Use migration service like 'docker compose --rm migrate bash'"
   
   # mapserver-dev:
