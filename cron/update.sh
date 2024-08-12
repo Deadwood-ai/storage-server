@@ -25,3 +25,6 @@ docker compose up -d --remove-orphans
 # update nginx config
 #cp ./nginx/storage-api.conf /etc/nginx/sites-available/storage-api.conf
 #service nginx reload
+
+# restart background process
+docker compose run --rm migrate python run.py start-queue
