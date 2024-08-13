@@ -27,4 +27,4 @@ docker compose up -d --remove-orphans
 #service nginx reload
 
 # restart background process
-docker compose run --rm migrate python run.py start-queue
+# docker compose run --rm migrate python run.py start-queue
