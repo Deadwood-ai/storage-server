@@ -53,6 +53,11 @@ services:
     image: ghcr.io/deadwood-ai/deadwood-api:latest
     links:
       - deadwood-api
+    deploy:
+      resources:
+        limit:
+          cpus: '1'
+          memory: 2G
     environment:
       BASE_DIR: /data
       SUPABASE_KEY: ${SUPABASE_KEY}
@@ -62,6 +67,10 @@ services:
       OLD_ARCHIVE_PATH: /data/archive
       API_URL: http://deadwood-api:40040
       MIGRATION_TABLE: migrate_v1
+      QUEUE_TABLE: v1_queue
+      QUEUE_POSITION_TABLE: v1_queue_positions
+      CONCURRENT_TASKS: 2
+      TASK_RETRY_DELAY: 60
     volumes:
       - ./production:/data
     command: echo "Use migration service like 'docker compose --rm migrate bash'"
