@@ -3,12 +3,13 @@ services:
     image: ghcr.io/deadwood-ai/deadwood-api:latest
     restart: always
     deploy:
-      limits:
-        cpus: '4.5'
-        memory: 5G
-      reservations:
-        cpus: '1'
-        memory: 1G
+      resources:
+        limits:
+          cpus: '4.5'
+          memory: 5G
+        reservations:
+          cpus: '1'
+          memory: 1G
     ports:
       - 127.0.0.1:40040:40040
     environment:
