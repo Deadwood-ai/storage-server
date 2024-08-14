@@ -55,7 +55,7 @@ services:
       - deadwood-api
     deploy:
       resources:
-        limit:
+        limits:
           cpus: '1'
           memory: 2G
     environment:
