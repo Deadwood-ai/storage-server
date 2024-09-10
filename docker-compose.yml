@@ -18,7 +18,8 @@ services:
 
       # adjust the settings of the HOST folders here
       ARCHIVE_DIR: archive
-      COG_DIR: cogs    
+      COG_DIR: cogs
+      THUNMBNAIL_DIR: thumbnails
 
       # setup the uvicorn server here
       UVICORN_PORT: 40040
@@ -36,6 +37,7 @@ services:
       METADATA_TABLE: v1_metadata
       COGS_TABLE: v1_cogs
       LABELS_TABLE: v1_labels
+      THUMBNAILS_TABLE: v1_thumbnails
 
       # queue settings
       QUEUE_TABLE: v1_queue
