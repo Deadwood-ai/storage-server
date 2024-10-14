@@ -18,9 +18,9 @@ cd $SCRIPT_DIR/..
 git pull
 
 # update the docker compose file
-docker compose pull
-docker compose build
-docker compose up -d --remove-orphans
+docker compose -f docker-compose.api.yml pull
+docker compose -f docker-compose.api.yml build
+docker compose -f docker-compose.api.yml up -d --remove-orphans
 
 # update nginx config
 #cp ./nginx/storage-api.conf /etc/nginx/sites-available/storage-api.conf
