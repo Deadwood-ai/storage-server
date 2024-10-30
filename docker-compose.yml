@@ -6,7 +6,7 @@ services:
       resources:
         limits:
           cpus: '4.5'
-          memory: 5G
+          memory: 6G
         reservations:
           cpus: '1'
           memory: 1G
