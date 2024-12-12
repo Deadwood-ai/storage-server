@@ -12,6 +12,9 @@ services:
           memory: 1G
     ports:
       - 127.0.0.1:40040:40040
+    volumes:
+      - ${GADM_DATA_PATH}:/gadm_data/gadm_410.gpkg
+      - ./production:/data
     environment:
       # this is the location INSIDE the container, only change when the mountpoint changes
       BASE_DIR: /data
@@ -33,20 +36,22 @@ services:
       PROCESSOR_PASSWORD: ${PROCESSOR_PASSWORD}
 
       # set the tables for the data
-      DATASETS_TABLE: v1_datasets
-      METADATA_TABLE: v1_metadata
-      COGS_TABLE: v1_cogs
-      LABELS_TABLE: v1_labels
-      THUMBNAILS_TABLE: v1_thumbnails
-      LOGS_TABLE: logs
+      # DATASETS_TABLE: v1_datasets
+      # METADATA_TABLE: v1_metadata
+      # COGS_TABLE: v1_cogs
+      # LABELS_TABLE: v1_labels
+      # THUMBNAILS_TABLE: v1_thumbnails
+      # LOGS_TABLE: logs
+      GADM_DATA_PATH: /gadm_data/gadm_410.gpkg
+      DEV_MODE: ${DEV_MODE}
+      LOGFIRE_TOKEN: ${LOGFIRE_TOKEN}
 
       # queue settings
-      QUEUE_TABLE: v1_queue
-      QUEUE_POSITION_TABLE: v1_queue_positions
+      # QUEUE_TABLE: v1_queue
+      # QUEUE_POSITION_TABLE: v1_queue_positions
       CONCURRENT_TASKS: 2
       TASK_RETRY_DELAY: 60
 
-    volumes:
-      - ./production:/data
+    # volumes:
 
     command: python run.py server
