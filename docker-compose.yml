@@ -6,7 +6,7 @@ services:
       resources:
         limits:
           cpus: '4.5'
-          memory: 6G
+          memory: 5G
         reservations:
           cpus: '1'
           memory: 1G
@@ -107,22 +107,3 @@ services:
         source: /home/mirko/.ssh/id_rsa.pub
         target: /root/.ssh/id_rsa.pub
     command: jupyter notebook --NotebookApp.ip=0.0.0.0 --allow-root --no-browser --NotebookApp.port=8888
-
-  # create a prometheus container for monitoring
-  prometheus:
-    image: prom/prometheus
-    restart: unless-stopped
-    user: root
-    volumes:
-      - ./production/prometheus:/prometheus
-      - type: bind
-        source: ./prometheus/prometheus.yml
-        target: /etc/prometheus/prometheus.yml
-    command:
-      - '--config.file=/etc/prometheus/prometheus.yml'
-      - '--storage.tsdb.path=/prometheus'
-    #      - '--web.console.libraries=/etc/prometheus/console_libraries'
-    #      - '--web.console.templates=/etc/prometheus/consoles'
-    #      - '--web.enable-lifecycle'
-    ports:
-      - '9090:9090'
