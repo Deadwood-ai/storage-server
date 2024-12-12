@@ -1,0 +1,90 @@
+services:
+  deadwood-api:
+    build:
+      context: ./deadwood-api
+      dockerfile: api/Dockerfile
+    restart: unless-stopped
+    deploy:
+      resources:
+        limits:
+          cpus: '4.5'
+          memory: 5G
+        reservations:
+          cpus: '1'
+          memory: 1G
+    healthcheck:
+      test: curl --fail http://127.0.0.1:40040/ || exit 1
+      interval: 30s
+      timeout: 0.5s
+      retries: 5
+      start_period: 1s
+    ports:
+      - 127.0.0.1:40040:40040
+    environment:
+      # this is the location INSIDE the container, only change when the mountpoint changes
+      BASE_DIR: /data
+
+      # adjust the settings of the HOST folders here
+      ARCHIVE_DIR: archive
+      COG_DIR: cogs
+      THUNMBNAIL_DIR: thumbnails
+
+      # setup the uvicorn server here
+      UVICORN_PORT: 40040
+      UVICORN_HOST: 0.0.0.0
+      UVICORN_ROOT_PATH: /api/v1
+
+      # Supabase settings
+      SUPABASE_URL: ${SUPABASE_URL}
+      SUPABASE_KEY: ${SUPABASE_KEY}
+      PROCESSOR_USERNAME: processor@deadtrees.earth
+      PROCESSOR_PASSWORD: ${PROCESSOR_PASSWORD}
+
+      # set the tables for the data
+      DATASETS_TABLE: v1_datasets
+      METADATA_TABLE: v1_metadata
+      COGS_TABLE: v1_cogs
+      LABELS_TABLE: v1_labels
+      THUMBNAILS_TABLE: v1_thumbnails
+      LOGS_TABLE: logs
+
+      # queue settings
+      QUEUE_TABLE: v1_queue
+      QUEUE_POSITION_TABLE: v1_queue_positions
+      CONCURRENT_TASKS: 2
+      TASK_RETRY_DELAY: 60
+
+      LOGFIRE_TOKEN: ${LOGFIRE_TOKEN}
+
+    volumes:
+      - ./local_dev_data/:/data
+
+    command: python run.py server
+
+  nginx:
+    image: nginx
+    restart: unless-stopped
+    deploy:
+      resources:
+        limits:
+          cpus: '2'
+          memory: 10G
+        reservations:
+          cpus: '2'
+          memory: 4G
+    ports:
+      - 8080:80
+    links:
+      - deadwood-api
+    depends_on:
+      deadwood-api:
+        condition: service_healthy
+    volumes:
+      - type: bind
+        source: ./nginx/conf
+        target: /etc/nginx/conf.d
+        read_only: true
+      - type: bind
+        source: ./local_dev_data
+        target: /data
+        read_only: true
