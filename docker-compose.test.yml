@@ -47,6 +47,6 @@ services:
       TASK_RETRY_DELAY: 60
 
     volumes:
-      - ./production:/data
+      - ./local_test/:/data
 
     command: python run.py server
