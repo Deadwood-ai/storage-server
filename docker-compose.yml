@@ -84,26 +84,3 @@ services:
       - ./production:/data
     command: echo "Use migration service like 'docker compose --rm migrate bash'"
 
-  # create a python container for direct access of the backend
-  jupyter:
-    build:
-      context: ./jupyter
-      dockerfile: Dockerfile
-    restart: unless-stopped
-    ports:
-      - 127.0.0.1:8888:8888
-    environment:
-      JUPYTER_TOKEN: ${JUPYTER_TOKEN}
-      SUPABASE_URL: ${SUPABASE_URL}
-      SUPABASE_KEY: ${SUPABASE_KEY}
-      METADATA_TABLE: upload_files_dev
-      PROCESSOR_PASSWORD: ${PROCESSOR_PASSWORD}
-    volumes:
-      - ./production:/data
-      - type: bind
-        source: /home/mirko/.ssh/id_rsa
-        target: /root/.ssh/id_rsa
-      - type: bind
-        source: /home/mirko/.ssh/id_rsa.pub
-        target: /root/.ssh/id_rsa.pub
-    command: jupyter notebook --NotebookApp.ip=0.0.0.0 --allow-root --no-browser --NotebookApp.port=8888
