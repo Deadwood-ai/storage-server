@@ -15,12 +15,15 @@ SCRIPT_DIR="$(cd "$(dirname "${BASH_SOURCE[0]}")" && pwd)"
 cd $SCRIPT_DIR/..
 
 # pull the latest changes to the repository
-git pull
+git pull --recurse-submodules
+
+# for easier handling the PRODUCTION docker compose file, we copy the api file to the local-only default file
+cp docker-compose.api.yml docker-compose.yml
 
 # update the docker compose file
 docker compose pull
 docker compose build
-docker compose up -f docker-compose.api.yml -d --remove-orphans
+docker compose up -d --remove-orphans
 
 # update nginx config
 #cp ./nginx/storage-api.conf /etc/nginx/sites-available/storage-api.conf

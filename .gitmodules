@@ -1,0 +1,3 @@
+[submodule "deadwood-api"]
+	path = deadwood-api
+	url = git@github.com:deadwood-ai/deadwood-api
