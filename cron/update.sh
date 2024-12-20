@@ -18,7 +18,7 @@ cd $SCRIPT_DIR/..
 git pull --recurse-submodules
 
 # for easier handling the PRODUCTION docker compose file, we copy the api file to the local-only default file
-cp docker-compose.api.yml docker-compose.yml
+cp docker-compose.legacy.yml docker-compose.yml
 
 # update the docker compose file
 docker compose pull
